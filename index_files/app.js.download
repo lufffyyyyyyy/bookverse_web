@@ -1,0 +1,148 @@
+initAuthNav();
+
+const grid = document.getElementById("grid");
+const q = document.getElementById("q");
+const searchBtn = document.getElementById("searchBtn");
+const catSelect = document.getElementById("catSelect");
+
+// Standard categories (extend anytime)
+const STANDARD_CATEGORIES = [
+  "All",
+  "Fantasy",
+  "Fiction",
+  "Non-Fiction",
+  "Romance",
+  "Young Adult",
+  "Horror",
+  "Sci-Fi",
+  "Mystery",
+  "Thriller",
+  "Biography",
+  "History",
+  "Self-Help",
+  "Business",
+  "Poetry",
+  "Children",
+  "Graphic Novel",
+  "Classics",
+];
+
+let selectedCategory =
+  new URLSearchParams(location.search).get("category") || "";
+
+/* ---------- Helpers ---------- */
+
+function debounce(fn, wait = 300) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), wait);
+  };
+}
+
+function renderBooks(books) {
+  if (!books || books.length === 0) {
+    grid.innerHTML = `<div class="alert">No books found.</div>`;
+    return;
+  }
+  grid.innerHTML = books
+    .map((b) => {
+      const avg = Number(b.avg_rating || 0);
+      const pct = (avg / 5) * 100;
+      const badge = b.category
+        ? `<span class="badge">${b.category}</span>`
+        : "";
+      return `
+        <a class="card" href="/public/book.html?id=${b.id}">
+          <img src="${b.cover_url || "/public/assets/placeholder.jpg"}" alt="${
+        b.title
+      } cover">
+          ${badge}
+          <strong>${b.title}</strong>
+          <span class="book-meta">by ${b.author}</span>
+          <div class="tile-meta">
+            <span class="stars sm" aria-hidden="true"><i style="width:${pct}%"></i></span>
+            <span class="rating-num">${avg ? avg.toFixed(1) : "0.0"}★</span>
+            <span class="muted">(${b.review_count || 0})</span>
+          </div>
+        </a>`;
+    })
+    .join("");
+}
+
+function buildURL() {
+  const params = new URLSearchParams();
+  const term = q.value.trim();
+  const cat = selectedCategory || "All";
+
+  if (term) params.set("q", term);
+  if (cat && cat !== "All") params.set("category", cat);
+
+  return "/api/books.php" + (params.toString() ? "?" + params.toString() : "");
+}
+
+/* Abort previous fetch when typing quickly */
+let currentAbort;
+
+function loadBooks() {
+  try {
+    if (currentAbort) currentAbort.abort();
+    currentAbort = new AbortController();
+
+    fetch(buildURL(), { credentials: "include", signal: currentAbort.signal })
+      .then((r) => r.json())
+      .then((d) => renderBooks(d.books))
+      .catch((err) => {
+        if (err?.name === "AbortError") return; // expected during fast typing
+        grid.innerHTML = `<div class="alert">Couldn’t load books.</div>`;
+      });
+  } catch {
+    grid.innerHTML = `<div class="alert">Couldn’t load books.</div>`;
+  }
+}
+
+function renderSelect() {
+  const opts = STANDARD_CATEGORIES.map(
+    (c) => `<option value="${c}">${c}</option>`
+  ).join("");
+
+  // If you kept a disabled placeholder in HTML, leave it; we just append options:
+  catSelect.insertAdjacentHTML("beforeend", opts);
+
+  // Initial value (fallback to "All" if none)
+  catSelect.value = selectedCategory || "All";
+
+  catSelect.onchange = () => {
+    selectedCategory = catSelect.value;
+    // Optional: keep URL shareable without reload
+    const u = new URL(location.href);
+    if (selectedCategory && selectedCategory !== "All") {
+      u.searchParams.set("category", selectedCategory);
+    } else {
+      u.searchParams.delete("category");
+    }
+    history.replaceState({}, "", u);
+    loadBooks();
+  };
+}
+
+/* ---------- Events ---------- */
+
+// Click search
+searchBtn.addEventListener("click", loadBooks);
+
+// Search-as-you-type (debounced)
+const typeSearch = debounce(() => loadBooks(), 300);
+q.addEventListener("input", typeSearch);
+
+// Still allow Enter to search immediately
+q.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    loadBooks();
+  }
+});
+
+/* ---------- Init ---------- */
+renderSelect();
+loadBooks();
