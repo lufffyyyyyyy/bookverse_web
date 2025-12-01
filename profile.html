@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Profile | BookVerse</title>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container flex">
+      <a href="/index.html" class="logo">BookVerse</a>
+      <nav>
+        <a href="/index.html">Home</a>
+
+        <div class="dropdown">
+          <a href="#" onclick="return false;">Categories ▾</a>
+          <div class="dropdown-content" id="navCategories">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <a href="/profile.html" id="navProfile" style="display: none">My Profile</a>
+        <a href="/login.html" id="navLogin">Login</a>
+        <a href="#" id="navLogout" style="display: none">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PROFILE GRID -->
+    <div class="profile-grid">
+
+      <!-- LEFT COL: User Info & Edit Form -->
+      <div class="stack">
+        <section class="card">
+          <h2 class="section-title">My Profile</h2>
+          <div id="userCard" class="mb-2">Loading…</div>
+
+          <hr class="divider">
+
+          <h3>Edit Profile</h3>
+          <form id="editProfileForm">
+            <div class="field">
+              <label for="pName">Name</label>
+              <input type="text" id="pName" required>
+            </div>
+            <div class="field">
+              <label for="pEmail">Email</label>
+              <input type="email" id="pEmail" required>
+            </div>
+            <div class="field">
+              <label for="pPass">New Password <span class="muted fw-normal">(optional)</span></label>
+              <input type="password" id="pPass" placeholder="Leave blank to keep current">
+            </div>
+            <button type="submit" id="saveProfileBtn">Save Changes</button>
+            <p id="profileMsg" class="muted"></p>
+          </form>
+        </section>
+      </div>
+
+      <!-- RIGHT COL: Favorites & Reviews -->
+      <div class="stack">
+
+        <!-- FAVORITES -->
+        <section class="card">
+          <h2 class="section-title">My Favorites</h2>
+          <div id="favoritesList">Loading…</div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section class="card">
+          <h2 class="section-title">My Reviews</h2>
+          <div id="reviews">Loading…</div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+
+</html>

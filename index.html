@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookVerse</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container flex">
+      <a href="#" class="logo">BookVerse</a>
+      <nav>
+        <a href="#">Home</a>
+
+        <div class="dropdown">
+          <a href="#" onclick="return false;">Categories ▾</a>
+          <div class="dropdown-content" id="navCategories">
+            <!-- Populated by JS -->
+            <a href="#">Loading…</a>
+          </div>
+        </div>
+        <a href="profile.html" id="navProfile" style="display: none">My Profile</a>
+        <a href="login.html" id="navLogin">Login</a>
+        <a href="#" id="navLogout" style="display: none">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Discover Books</h1>
+
+    <!-- Search bar with category select -->
+    <div class="searchbar has-select">
+      <select id="catSelect" aria-label="Category">
+        <option value="" selected disabled>Select a category</option>
+        <!-- JS will append: All, Fantasy, Horror, etc. -->
+      </select>
+
+      <input id="q" placeholder="Search by title or author..." />
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>

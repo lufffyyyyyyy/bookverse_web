@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookVerse Presentation</title>
+    <style>
+        :root {
+            --bg: #1e1b4b;
+            --text: #ffffff;
+            --accent: #6a4cff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #a5b4fc;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            text-align: left;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #5a3cf0;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .notes {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            max-width: 400px;
+            display: none;
+            /* Hidden by default, toggle with 'N' */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress" id="progressBar" style="width: 0%"></div>
+
+    <!-- Slide 1 -->
+    <div class="slide active">
+        <div class="card">
+            <h1>BookVerse</h1>
+            <h2>Discover Your Next Great Read</h2>
+            <p style="font-size: 1.5rem; opacity: 0.8;">Presenters: [Your Name 1] & [Your Name 2]</p>
+        </div>
+        <div class="notes">
+            Intro: Good morning/afternoon. We are excited to present BookVerse, a modern web app for book discovery and
+            reviews.
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <div class="card">
+            <h2>User Interface & Design</h2>
+            <h3>A Modern, "Glassmorphism" Aesthetic</h3>
+            <ul>
+                <li><strong>Color Palette:</strong> Deep Indigo & Soft Violet for a premium feel.</li>
+                <li><strong>Glassmorphism:</strong> Translucent cards and blurred backgrounds.</li>
+                <li><strong>Responsive:</strong> Fluid grid layout for all devices.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            UI: We used a Glassmorphism aesthetic with deep indigo colors. It's fully responsive, adapting to any screen
+            size.
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <div class="card">
+            <h2>Discovery & Navigation</h2>
+            <h3>Effortless Discovery</h3>
+            <ul>
+                <li><strong>Randomized Feed:</strong> Fresh books on every visit.</li>
+                <li><strong>Smart Search:</strong> Instant filtering by Title or Author.</li>
+                <li><strong>Dynamic Categories:</strong> Dropdown menu for genres.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            Discovery: Randomized sorting keeps it fresh. Smart search and dynamic categories help users find what they
+            want quickly.
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <div class="card">
+            <h2>User Interaction</h2>
+            <h3>Engaging with Content</h3>
+            <ul>
+                <li><strong>Favorites:</strong> One-click 'Heart' toggle.</li>
+                <li><strong>Reviews:</strong> 5-star ratings and written reviews.</li>
+                <li><strong>Real-time:</strong> Instant UI updates without reloads.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            Interaction: Users can favorite books and leave reviews. The UI updates instantly for a smooth experience.
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+        <div class="card">
+            <h2>User Account Management</h2>
+            <h3>Your Personal Library</h3>
+            <ul>
+                <li><strong>Profile Hub:</strong> Central dashboard for User Info & Activity.</li>
+                <li><strong>Management:</strong> Delete reviews and remove favorites.</li>
+                <li><strong>Security:</strong> Secure auth with password hashing.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            Account: The profile is the hub. Users can manage (delete/remove) their content. Security is handled with
+            password hashing.
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+        <div class="card">
+            <h2>Technical Architecture</h2>
+            <h3>Built with Performance in Mind</h3>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JS (ES6+).</li>
+                <li><strong>Backend:</strong> PHP (RESTful API).</li>
+                <li><strong>Database:</strong> MySQL (Normalized schema).</li>
+                <li><strong>Architecture:</strong> Separation of Concerns.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            Tech: Vanilla JS frontend, PHP backend API, MySQL database. Clean separation of concerns.
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+        <div class="card">
+            <h2>Team Reflection</h2>
+            <h3>Learning & Growth</h3>
+            <ul>
+                <li><strong>Challenge:</strong> CSS Specificity (Dropdowns).</li>
+                <li><strong>Solution:</strong> Refactoring and Debugging.</li>
+                <li><strong>Challenge:</strong> Async Logic (Favorites).</li>
+                <li><strong>Solution:</strong> Using <code>async/await</code>.</li>
+            </ul>
+        </div>
+        <div class="notes">
+            Reflection: We learned about CSS specificity and async JS. We worked to our strengths to overcome
+            challenges.
+        </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+        <div class="card">
+            <h1>Live Demo</h1>
+            <p style="font-size: 1.5rem;">Switching to Application...</p>
+        </div>
+        <div class="notes">
+            Demo: Now we will show you the live application.
+        </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide">
+        <div class="card">
+            <h1>Thank You</h1>
+            <h2>Any Questions?</h2>
+        </div>
+        <div class="notes">
+            Conclusion: Thank you for listening. We are happy to take questions.
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">Previous</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progressBar');
+        const notes = document.querySelectorAll('.notes');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update progress bar
+            const pct = ((currentSlide + 1) / slides.length) * 100;
+            progress.style.width = pct + '%';
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
+        }
+
+        function changeSlide(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            updateSlide();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'n') {
+                document.querySelectorAll('.notes').forEach(n => {
+                    n.style.display = n.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+        });
+
+        updateSlide();
+    </script>
+</body>
+
+</html>

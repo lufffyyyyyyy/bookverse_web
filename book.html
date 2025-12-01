@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book | BookVerse</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container flex">
+      <a href="/index.html" class="logo">BookVerse</a>
+      <nav>
+        <a href="/index.html">Home</a>
+
+        <div class="dropdown">
+          <a href="#" onclick="return false;">Categories ▾</a>
+          <div class="dropdown-content" id="navCategories">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <a href="/profile.html" id="navProfile" style="display: none">My Profile</a>
+        <a href="/login.html" id="navLogin">Login</a>
+        <a href="#" id="navLogout" style="display: none">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container stack">
+    <!-- HERO -->
+    <section class="card">
+      <div id="hero" class="book-hero">
+        <!-- populated by JS -->
+      </div>
+    </section>
+
+    <!-- SYNOPSIS -->
+    <section class="card">
+      <h2 class="section-title">Synopsis</h2>
+      <p id="synopsis" class="muted">Loading…</p>
+    </section>
+
+    <!-- REVIEWS LIST -->
+    <section class="card">
+      <h2 class="section-title">Reviews</h2>
+      <div id="reviews">Loading…</div>
+    </section>
+
+    <!-- WRITE A REVIEW -->
+    <section class="card write-box" id="writeWrap" style="display: none">
+      <h2 class="section-title">Write a Review</h2>
+      <div class="field">
+        <label for="rating">Rating</label>
+        <div id="ratingStars" class="star-input" aria-label="Select rating">
+          <!-- stars injected -->
+        </div>
+      </div>
+      <div class="field">
+        <label for="content">Your review</label>
+        <textarea id="content" placeholder="Share your thoughts…"></textarea>
+      </div>
+      <button id="postBtn">Post Review</button>
+      <p class="muted" id="postMsg"></p>
+    </section>
+
+    <!-- SIGN IN HINT -->
+    <section class="card" id="loginHint" style="display: none">
+      <p>
+        Want to review this book? <a href="/public/login.html">Login</a> or
+        <a href="/public/register.html">create an account</a>.
+      </p>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/book.js"></script>
+</body>
+
+</html>
